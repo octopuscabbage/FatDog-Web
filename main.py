@@ -19,5 +19,3 @@ def login():
             return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
-if __name__ == "__main__":
-    app.run()
