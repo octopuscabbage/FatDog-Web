@@ -1,3 +1,37 @@
 {% extends "layout.html" %}
 {% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+
+<div class="container">
+<h1>{{fitbit_name}}</h1>
+<canvas id="fit-bit-chart" width="400" height="400"></canvas>
+
+<h1>{{fitbark_name}}</h1>
+<canvas id="fit-bark-chart" width="400" height="400"></canvas>
+</div>
+
+
+<script>
+var fit_bark_context = document.getElementById("fit-bark-chart").getContext("2d");
+
+var fitbark_data = {
+	labels : {{fitbark_dates|safe}},
+	datasets: [{ label: {{fitbark_name|safe}},
+                     data: {{fitbark_activities}} }]
+};
+
+var fitbark_chart = new Chart(fit_bark_context).Line(fitbark_data);
+			    
+var fitbit_context = document.getElementById("fit-bit-chart").getContext("2d");
+
+var fitbit_data = {
+	labels : {{fitbit_dates|safe}},
+	datasets: [{ label: {{fitbit_name|safe}},
+                     data: {{fitbit_activities}} }]
+};
+
+var fitbit_chart = new Chart(fitbit_context).Line(fitbit_data);
+
+
+</script>
 {% endblock %}
